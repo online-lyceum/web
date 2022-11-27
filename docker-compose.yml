@@ -1,0 +1,7 @@
+version: '3'
+services:
+  nginx:
+    image: web-app:test
+    ports:
+      - "8002:80"
+
