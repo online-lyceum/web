@@ -16,7 +16,7 @@ pipeline {
         }
         stage("Run images") {
             steps {
-                sh 'docker-compose up -d'
+                sh 'docker-compose up -d -f ./docker-compose.prod.yml'
             }
         }
     }
