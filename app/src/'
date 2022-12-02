@@ -6,8 +6,8 @@
                 <option disabled value="">Учебное заведение</option>
                 <option v-for="school in schools" :key="school.school_id" :value="school.school_id">{{ school.name }}</option>
             </select>
-            <input @input="selectClass" type="number" placeholder="Класс/курс" v-model="class_number">
-            <input @input="selectClass" type="text" placeholder="Буква/код" v-model="class_letter">
+            <input @input="selectClass" type="number" placeholder="Class number" v-model="class_number">
+            <input @input="selectClass" type="text" placeholder="Class letter" v-model="class_letter">
         </form>
     </div>
 </template>
@@ -31,7 +31,7 @@ export default {
                 var classes = json_res['classes'];
                 var find_any = false;
                 for (var i = 0; i < classes.length; i++){
-                    if ((this.class_number == classes[i]['number']) && (this.class_letter.toUpperCase() == classes[i]['letter'])){
+                    if ((this.class_number == classes[i]['number']) && (this.class_letter == classes[i]['letter'])){
                         this.class_id = classes[i]['class_id'];
                         find_any = true;
                     }
