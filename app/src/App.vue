@@ -1,28 +1,28 @@
 <template>
     <div id="App">
-        <select-class @select="selectingClass" />
-        <lesson-list :class_id="class_id" />
+        <select-subgroup @select="selectingSubgroup" />
+        <lesson-list :subgroup_id="subgroup_id" />
     </div>
 </template>
 
 <script>
-import SelectClass from "@/components/SelectClass"
+import SelectSubgroup from "@/components/SelectSubgroup"
 import LessonList from "@/components/LessonList"
 
 export default {
   name: 'App',
   data() {
     return {
-        class_id: undefined 
+        subgroup_id: undefined 
     }
   },
   components: {
-    SelectClass,
+    SelectSubgroup,
     LessonList
   },
   methods: {
-    selectingClass(class_id) {
-        this.class_id = class_id
+    selectingSubgroup(subgroup_id) {
+        this.subgroup_id = subgroup_id
     }
   }
 }

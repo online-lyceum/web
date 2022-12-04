@@ -1,7 +1,7 @@
 <template>
     <div>
-        <p>Используется class_id = {{ class_id }}</p>
-        <h3>Список уроков</h3>
+        <p>Используется subgroup_id = {{ subgroup_id }}</p>
+        <h3>Список уроков на {{ weekday }}</h3>
         <ul>
             <li v-for="lesson in lesson_list" :key="lesson.lesson_id">
                 <p>{{ lesson.name }} {{ lesson.start_time.hour }}:{{ lesson.start_time.minute}} - {{ lesson.end_time.hour }}:{{ lesson.end_time.minute}}</p>
@@ -14,26 +14,29 @@
 export default {
     data() {
         return {
-            lesson_list: []
+            lesson_list: [],
+            weekday: ""
         }
     },
     methods: {
         async showList() {
-            if (this.class_id != ""){
-                var res = await fetch("https://dev.lava-land.ru/api/class/" + this.class_id + "/lesson");
+            if (this.subgroup_id != ""){
+                var res = await fetch("https://dev.lava-land.ru/api/subgroup/" + this.subgroup_id + "/lessons_to_show_today");
                 if (res.status == 200){
                     var json_res = await res.json();
-                    var lesson_list = json_res.lessons;
-                    this.lesson_list = lesson_list;
+                    this.lesson_list = json_res.lessons;
+                    var weekdays_names = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+                    this.weekday = weekdays_names[json_res.weekday];
                 }
             } else {
+                this.weekday = "",
                 this.lesson_list = [];
             }
         }
     },
-    props: ['class_id'],
+    props: ['subgroup_id'],
     watch: {
-        class_id() {
+        subgroup_id() {
             this.showList();
         }
     }
