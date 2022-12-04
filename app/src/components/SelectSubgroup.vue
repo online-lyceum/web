@@ -37,6 +37,8 @@ export default {
             }
             var res = await fetch("https://dev.lava-land.ru/api/school/" + this.school_id+ "/class");
             var class_id = ""
+            this.subgroup_id = ""
+            this.need_to_select_subgroup = false;
             if (res.status == 200){
                 var json_res = await res.json();
                 var classes = json_res['classes'];
