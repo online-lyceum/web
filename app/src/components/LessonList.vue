@@ -1,12 +1,18 @@
 <template>
     <div>
-        <p>Используется subgroup_id = {{ subgroup_id }}</p>
-        <h3>Список уроков на {{ weekday }}</h3>
-        <ul>
-            <li v-for="lesson in lesson_list" :key="lesson.lesson_id">
-                <p>{{ lesson.name }} {{ lesson.start_time.hour }}:{{ lesson.start_time.minute}} - {{ lesson.end_time.hour }}:{{ lesson.end_time.minute}}</p>
-            </li>
-        </ul>
+        <div class="my-card" v-for="weekday in weekdays" :key="weekday.name">
+            <h3>{{ weekday_names[weekday] }}</h3>
+            <ul>
+                <li v-for="lesson in lesson_list.filter(lesson => lesson.weekday === weekday)" :key="lesson.lesson_id">
+                    <p> 
+                        {{ lesson.name }} 
+                        {{ lesson.start_time.hour }}:{{(lesson.start_time.minute < 10 ? '0' : '') + lesson.start_time.minute}} - 
+                        {{ lesson.end_time.hour }}:{{(lesson.end_time.minute < 10 ? '0' : '') + lesson.end_time.minute}}
+                    </p>
+                </li>
+            </ul>
+        </div>
+        
     </div>
 </template>
 
@@ -15,23 +21,21 @@ export default {
     data() {
         return {
             lesson_list: [],
-            weekday: ""
+            weekdays: [0, 1, 2, 3, 4, 5, 6],
+            weekday_names: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
         }
     },
     methods: {
         async showList() {
-            if (this.subgroup_id != ""){
-                var res = await fetch("https://dev.lava-land.ru/api/subgroup/" + this.subgroup_id + "/lessons_to_show_today");
-                if (res.status == 200){
-                    var json_res = await res.json();
-                    this.lesson_list = json_res.lessons;
-                    var weekdays_names = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
-                    this.weekday = weekdays_names[json_res.weekday];
-                }
+            var res = await fetch("https://dev.lava-land.ru/api/lessons?subgroup_id=" + this.subgroup_id);
+            if (res.status == 200){
+                var json_res = await res.json();
+                
+                this.lesson_list = json_res.lessons;
             } else {
-                this.weekday = "",
                 this.lesson_list = [];
             }
+            console.log(this.lesson_list);
         }
     },
     props: ['subgroup_id'],
