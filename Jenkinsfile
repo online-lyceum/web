@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage("Build image") {
             steps {
-                sh 'docker build -t web-app:test .'
+                sh 'docker build -t web-app:${JOB_NAME} .'
             }
         }
         stage("Run images") {
