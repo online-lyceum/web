@@ -10,7 +10,7 @@
         </div>
     </div>
     <div v-else>
-        <my-button @click="unselectSchool">Назад</my-button>
+        <my-button @click="unselectSchool" class="back-button">Назад</my-button>
     </div>
 </template>
 
@@ -47,4 +47,7 @@ export default {
 </script>
 
 <style scoped>
+.back-button{
+    margin-top: 40px;
+}
 </style>

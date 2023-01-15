@@ -3,12 +3,6 @@
         <select-school @select="selectingSchool" v-if="subgroup_id === undefined"/>
         <select-subgroup :school_id="school_id" @select="selectingSubgroup" v-if="!(school_id === undefined) & (subgroup_id === undefined)"/>
         <top-header page="Главная" v-if="!(subgroup_id === undefined)"/>
-        <my-dialog v-if>
-          <ul>
-            <li>First</li>
-            <li>Second</li>
-          </ul>
-        </my-dialog>
         <lesson-list :subgroup_id="subgroup_id" v-show="!(subgroup_id === undefined)" />
     </div>
 </template>
@@ -51,6 +45,8 @@ export default {
 }
 body {
     padding: 20px;
+    padding-top: 0px;
+    margin: 0px;
     background-color: #0C3B2E;
 }
 .my-card {

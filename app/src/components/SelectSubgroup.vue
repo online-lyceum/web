@@ -89,7 +89,9 @@ export default {
 </script>
 
 <style scoped>
+.my-card {
+}
 .select-button {
-    margin-top: 10px;
+    margin-top: 50px;
 }
 </style>
