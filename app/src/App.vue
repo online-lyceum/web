@@ -2,6 +2,13 @@
     <div id="App">
         <select-school @select="selectingSchool" v-if="subgroup_id === undefined"/>
         <select-subgroup :school_id="school_id" @select="selectingSubgroup" v-if="!(school_id === undefined) & (subgroup_id === undefined)"/>
+        <top-header page="Главная" v-if="!(subgroup_id === undefined)"/>
+        <my-dialog v-if>
+          <ul>
+            <li>First</li>
+            <li>Second</li>
+          </ul>
+        </my-dialog>
         <lesson-list :subgroup_id="subgroup_id" v-show="!(subgroup_id === undefined)" />
     </div>
 </template>
@@ -10,19 +17,21 @@
 import SelectSubgroup from "@/components/SelectSubgroup"
 import LessonList from "@/components/LessonList"
 import SelectSchool from "@/components/SelectSchool.vue"
+import TopHeader from "@/components/TopHeader.vue"
 
 export default {
   name: 'App',
   data() {
     return {
         school_id: undefined,
-        subgroup_id: undefined 
+        subgroup_id: undefined,
     }
   },
   components: {
     SelectSchool,
     SelectSubgroup,
-    LessonList
+    LessonList,
+    TopHeader
   },
   methods: {
     selectingSchool(school_id) {

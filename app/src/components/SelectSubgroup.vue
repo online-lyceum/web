@@ -9,7 +9,7 @@
             </select>
 
         </form>
-    <my-button @click="selectSubgroup" class="select-button">Выбрать</my-button>
+    <my-button @click="selectSubgroup" :disabled="subgroup_id === ''" class="select-button">Выбрать</my-button>
     </div>
 </template>
 
