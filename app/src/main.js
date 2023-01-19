@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import components from "@/components/UI"
+import './registerServiceWorker'
 
 const app = createApp(App);
 components.forEach(
